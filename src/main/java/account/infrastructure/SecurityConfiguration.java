@@ -23,6 +23,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth  // manage access
                         .requestMatchers(HttpMethod.POST, "/api/auth/signup").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/empl/payment").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/api/auth/changepass").authenticated()
                         .requestMatchers("/actuator/shutdown").permitAll()
                         .anyRequest().denyAll()
                 )
