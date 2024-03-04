@@ -1,7 +1,6 @@
 package account.infrastructure.security;
 
 import account.domain.UserDetailsAdapter;
-import account.domain.UserIdentity;
 import account.infrastructure.db.UserIdentityStorage;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,9 +18,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserIdentity user = userIdentityStorage.findUserIdentityByEmail(username.toLowerCase())
+        return userIdentityStorage.findUserIdentityByEmailIgnoreCase(username)
+                .map(UserDetailsAdapter::new)
                 .orElseThrow(() -> new UsernameNotFoundException("Not found"));
-
-        return new UserDetailsAdapter(user);
     }
 }

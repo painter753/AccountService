@@ -1,6 +1,6 @@
-package account.domain;
+package account.presentation.dto;
 
-public record AuthResponse(
+public record AuthResponseDto(
         Long id,
         String name,
         String lastname,

@@ -1,12 +1,13 @@
-package account.domain;
+package account.infrastructure.db;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity
-public class UserIdentity {
+
+@Entity(name = "userIdentity")
+public class UserIdentityDto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

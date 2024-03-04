@@ -1,5 +1,6 @@
 package account.domain;
 
+import account.infrastructure.db.UserIdentityDto;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,25 +9,25 @@ import java.util.Collection;
 import java.util.List;
 
 public class UserDetailsAdapter implements UserDetails {
-    private final UserIdentity userIdentity;
+    private final UserIdentityDto userIdentityDto;
 
-    public UserDetailsAdapter(UserIdentity userIdentity) {
-        this.userIdentity = userIdentity;
+    public UserDetailsAdapter(UserIdentityDto userIdentityDto) {
+        this.userIdentityDto = userIdentityDto;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(userIdentity.getAuthority()));
+        return List.of(new SimpleGrantedAuthority(userIdentityDto.getAuthority()));
     }
 
     @Override
     public String getPassword() {
-        return userIdentity.getPassword();
+        return userIdentityDto.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return userIdentity.getEmail().toLowerCase();
+        return userIdentityDto.getEmail().toLowerCase();
     }
 
     @Override
